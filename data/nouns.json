@@ -1,0 +1,47 @@
+
+{
+    "default": {
+           "singular": "blank",
+           "plural": "blanks",
+           "preposition": "a",
+           "prepositionPlural": "",
+           "append": [""],
+           "preAppend": ["adjective"],
+           "appendPlural": [""],
+           "preAppendPlural": ["quantity", "adjectivePlural"]
+
+    },
+   "individuals": [
+       {
+            "singular": "canadian",
+            "plural": "canadians",
+            "preposition": "a",
+            "prepositionPlural": "the",
+            "append": ["noun"]
+       },
+       {
+            "singular": "dragon"
+       },
+       {
+            "singular": "viking",
+            "prepositionPlural": "the"
+       },
+
+       {
+            "singular": "alien",
+            "preposition": "an"
+       },
+       {
+            "singular": "zombie",
+            "preposition": "a",
+            "prepositionPlural": ""
+       }
+    ],
+   "objects": [
+       {
+           "singular": "weapon",
+           "prepositionPlural": ["their", "some", ""]
+       }
+   ]
+}
+

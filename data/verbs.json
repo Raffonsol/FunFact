@@ -1,0 +1,29 @@
+
+{
+    "default": {
+        "present": "action",
+        "presentPlural": "action",
+        "past": "actioned",
+        "pastPlural": "actioned",
+        "have": "actioned",
+        "appliesTo": ["individuals", "objects"]
+    },
+   "verbs": [
+      {
+          "present": "live",
+          "past": "lived",
+          "have": "lived",
+          "appliesTo": ["individuals"]
+      },
+      {
+          "present": "is",
+          "presentPlural": "are",
+          "past": "was",
+          "pastPlural": "were",
+          "have": "been",
+          "appliesTo": ["individuals", "objects"]
+      }
+
+    ]
+}
+

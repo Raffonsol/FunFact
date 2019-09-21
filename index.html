@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fun Fact</title>
+    <script>
+        function readysetgo() {
+            loadJSON(function(response) {
+                // Parse JSON string into object
+                var actual_JSON = JSON.parse(response);
+                var formattedNouns = makeNounsGoodToGo(actual_JSON);
+                console.log(formattedNouns);
+            }, './data/nouns.json');
+
+            loadJSON(function(response) {
+                // Parse JSON string into object
+                var actual_JSON = JSON.parse(response);
+                var formattedVerbs = makeVerbsGoodToGo(actual_JSON);
+                console.log(formattedVerbs);
+            }, './data/verbs.json');
+        }
+
+        function loadJSON(callback, file) {
+
+            var xobj = new XMLHttpRequest();
+            xobj.overrideMimeType("application/json");
+            xobj.open('GET', file, true); // Replace 'my_data' with the path to your file
+            xobj.onreadystatechange = function () {
+                if (xobj.readyState == 4 && xobj.status == "200") {
+                    // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+                    callback(xobj.responseText);
+                }
+            };
+            xobj.send(null);
+        }
+
+        function makeNounsGoodToGo(nouns) {
+            var otherNouns = nouns;
+
+            // indivarduals
+            for (let i = 0; i < otherNouns.individuals.length; i++) {
+                otherNouns.individuals[i].plural = nouns.individuals[i].plural ? nouns.individuals[i].plural : (nouns.individuals[i].singular + "s");
+                otherNouns.individuals[i].preposition = nouns.individuals[i].preposition ? nouns.individuals[i].preposition : 'a';
+                otherNouns.individuals[i].prepositionPlural = nouns.individuals[i].prepositionPlural ? nouns.individuals[i].prepositionPlural : "";
+                otherNouns.individuals[i].append = nouns.individuals[i].append ? nouns.individuals[i].append : [""];
+                otherNouns.individuals[i].preAppend = nouns.individuals[i].preAppend ? nouns.individuals[i].preAppend : ["adjective"];
+                otherNouns.individuals[i].appendPlural = nouns.individuals[i].appendPlural ? nouns.individuals[i].appendPlural : [""];
+                otherNouns.individuals[i].preAppendPlural = nouns.individuals[i].preAppendPlural ? nouns.individuals[i].preAppendPlural : ["quantity", "adjectivePlural"];1
+            }
+            // objects
+            for (let i = 0; i < otherNouns.objects.length; i++) {
+                otherNouns.objects[i].plural = nouns.objects[i].plural ? nouns.objects[i].plural : (nouns.objects[i].singular + "s");
+                otherNouns.objects[i].preposition = nouns.objects[i].preposition ? nouns.objects[i].preposition : 'a';
+                otherNouns.objects[i].prepositionPlural = nouns.objects[i].prepositionPlural ? nouns.objects[i].prepositionPlural : "";
+                otherNouns.objects[i].append = nouns.objects[i].append ? nouns.objects[i].append : [""];
+                otherNouns.objects[i].preAppend = nouns.objects[i].preAppend ? nouns.objects[i].preAppend : ["adjective"];
+                otherNouns.objects[i].appendPlural = nouns.objects[i].appendPlural ? nouns.objects[i].appendPlural : [""];
+                otherNouns.objects[i].preAppendPlural = nouns.objects[i].preAppendPlural ? nouns.objects[i].preAppendPlural : ["quantity", "adjectivePlural"];
+            }
+            return otherNouns;
+        }
+
+        function makeVerbsGoodToGo(verbs) {
+            var otherVerbs = verbs;
+
+            // indivarduals
+            for (let i = 0; i < otherVerbs.length; i++) {
+                otherVerbs[i].presentPlural = verbs[i].presentPlural ? verbs[i].presentPlural : verbs[i].present;
+                otherVerbs[i].past = verbs[i].past ? verbs[i].past : (verbs[i].present + 'ed');
+                otherVerbs[i].pastPlural = verbs[i].pastPlural ? verbs[i].presentPlural : verbs[i].present;
+
+            }
+
+            return otherVerbs;
+        }
+    </script>
+</head>
+<body onload="readysetgo()">
+
+</body>
+</html>
