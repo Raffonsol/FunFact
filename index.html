@@ -5,14 +5,14 @@
     <title>Fun Fact</title>
     <script>
         function readysetgo() {
-            loadJSON(function(response) {
+            loadJSON(function (response) {
                 // Parse JSON string into object
                 var actual_JSON = JSON.parse(response);
                 var formattedNouns = makeNounsGoodToGo(actual_JSON);
                 console.log(formattedNouns);
             }, './data/nouns.json');
 
-            loadJSON(function(response) {
+            loadJSON(function (response) {
                 // Parse JSON string into object
                 var actual_JSON = JSON.parse(response);
                 var formattedVerbs = makeVerbsGoodToGo(actual_JSON);
@@ -34,6 +34,11 @@
             xobj.send(null);
         }
 
+        /**
+         *
+         * @param nouns
+         * @returns {*}
+         */
         function makeNounsGoodToGo(nouns) {
             var otherNouns = nouns;
 
@@ -45,7 +50,7 @@
                 otherNouns.individuals[i].append = nouns.individuals[i].append ? nouns.individuals[i].append : [""];
                 otherNouns.individuals[i].preAppend = nouns.individuals[i].preAppend ? nouns.individuals[i].preAppend : ["adjective"];
                 otherNouns.individuals[i].appendPlural = nouns.individuals[i].appendPlural ? nouns.individuals[i].appendPlural : [""];
-                otherNouns.individuals[i].preAppendPlural = nouns.individuals[i].preAppendPlural ? nouns.individuals[i].preAppendPlural : ["quantity", "adjectivePlural"];1
+                otherNouns.individuals[i].preAppendPlural = nouns.individuals[i].preAppendPlural ? nouns.individuals[i].preAppendPlural : ["quantity", "adjectivePlural"];
             }
             // objects
             for (let i = 0; i < otherNouns.objects.length; i++) {
@@ -63,11 +68,13 @@
         function makeVerbsGoodToGo(verbs) {
             var otherVerbs = verbs;
 
-            // indivarduals
+            // vebiea
             for (let i = 0; i < otherVerbs.length; i++) {
                 otherVerbs[i].presentPlural = verbs[i].presentPlural ? verbs[i].presentPlural : verbs[i].present;
                 otherVerbs[i].past = verbs[i].past ? verbs[i].past : (verbs[i].present + 'ed');
-                otherVerbs[i].pastPlural = verbs[i].pastPlural ? verbs[i].presentPlural : verbs[i].present;
+                otherVerbs[i].pastPlural = verbs[i].pastPlural ? verbs[i].presentPlural : otherVerbs[i].past;
+                otherVerbs[i].have = verbs[i].have ? verbs[i].have : otherVerbs[i].past;
+                otherVerbs[i].appliesTo = verbs[i].appliesTo ? verbs[i].appliesTo : ["individuals", "objects"];
 
             }
 
